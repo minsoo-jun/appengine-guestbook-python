@@ -21,8 +21,6 @@ libraries:
   version: latest
 - name: jinja2
   version: latest
-- name: Flask
-  version: latest
 - name: requests
   version: latest
 # [END libraries] requests
