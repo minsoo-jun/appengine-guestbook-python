@@ -27,7 +27,7 @@ from google.appengine.ext import ndb
 
 import jinja2
 import webapp2
-from pip._vendor import requests
+import requests
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
