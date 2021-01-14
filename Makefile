@@ -20,6 +20,7 @@ all: deploy
 
 .PHONY: deploy
 deploy:
+    pip install -r requirements.txt
 	appcfg.py update . -A $(GAE_PROJECT) --version=$(VERSION)
 
 .PHONY: e2e_test
