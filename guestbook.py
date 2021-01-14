@@ -28,6 +28,9 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
+from flask import Flask
+import requests
+
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
