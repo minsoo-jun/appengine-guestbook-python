@@ -18,6 +18,10 @@
 import os
 import urllib
 
+# For GA
+import logging
+import requests
+
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -30,8 +34,34 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     autoescape=True)
 # [END imports]
 
+# For GA
+GA_TRACKING_ID = 'G-8HLZZQHWMX'
+
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
+# for GA
+def track_event(category, action, label=None, value=0):
+    data = {
+        'v': '1',  # API Version.
+        'tid': GA_TRACKING_ID,  # Tracking ID / Property ID.
+        # Anonymous Client Identifier. Ideally, this should be a UUID that
+        # is associated with particular user, device, or browser instance.
+        'cid': '555',
+        't': 'event',  # Event hit type.
+        'ec': category,  # Event category.
+        'ea': action,  # Event action.
+        'el': label,  # Event label.
+        'ev': value,  # Event value, must be an integer
+        'ua': 'Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14'
+    }
+
+    response = requests.post(
+        'https://www.google-analytics.com/collect', data=data)
+
+    # If the request fails, this will raise a RequestException. Depending
+    # on your application's needs, this may be a non-error and can be caught
+    # by the caller.
+    response.raise_for_status()
 
 # We set a parent key on the 'Greetings' to ensure that they are all
 # in the same entity group. Queries across the single entity group
@@ -65,6 +95,12 @@ class Greeting(ndb.Model):
 class MainPage(webapp2.RequestHandler):
 
     def get(self):
+
+        # for GA
+        track_event(
+            category='Appengin-GA',
+            action='GA test action')
+
         guestbook_name = self.request.get('guestbook_name',
                                           DEFAULT_GUESTBOOK_NAME)
         greetings_query = Greeting.query(
