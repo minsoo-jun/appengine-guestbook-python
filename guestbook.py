@@ -17,7 +17,7 @@
 # [START imports]
 import os
 import urllib
-import requests
+import urllib.request
 
 # For GA
 import logging
