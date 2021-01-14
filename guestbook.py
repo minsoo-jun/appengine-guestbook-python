@@ -17,7 +17,6 @@
 # [START imports]
 import os
 import urllib
-import requests
 
 # For GA
 import logging
@@ -40,6 +39,8 @@ GA_TRACKING_ID = 'G-8HLZZQHWMX'
 
 DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
+request = webapp2.Request.blank('/')
+
 # for GA
 def track_event(category, action, label=None, value=0):
     data = {
@@ -56,7 +57,7 @@ def track_event(category, action, label=None, value=0):
         'ua': 'Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14'
     }
 
-    response = requests.post(
+    response = request.post(
         'https://www.google-analytics.com/collect', data=data)
 
     # If the request fails, this will raise a RequestException. Depending
