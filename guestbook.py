@@ -17,6 +17,7 @@
 # [START imports]
 import os
 import urllib
+import requests
 
 # For GA
 import logging
@@ -27,9 +28,6 @@ from google.appengine.ext import ndb
 
 import jinja2
 import webapp2
-
-from flask import Flask
-import requests
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
