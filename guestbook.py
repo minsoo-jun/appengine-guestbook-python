@@ -20,7 +20,7 @@ import urllib
 
 # For GA
 import logging
-import requests
+#import requests
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
